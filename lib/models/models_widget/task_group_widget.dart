@@ -5,7 +5,39 @@ import 'package:memote/view/pages/task_group_page.dart';
 class TaskGroupWidget extends StatelessWidget {
   final TaskGroup taskGroup;
 
-  const TaskGroupWidget({Key key, this.taskGroup}) : super(key: key);
+  const TaskGroupWidget(
+      {Key key, @required this.taskGroup})
+      : super(key: key);
+
+  Widget progressGauge() {
+    return Stack(
+      children: <Widget>[
+        Container(
+          height: 15.0,
+          width: 100.0,
+          decoration: BoxDecoration(
+            color: Colors.grey,
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          ),
+          child: null,
+        ),
+        Container(
+          height: 15.0,
+          width: taskGroup.progress,
+          decoration: BoxDecoration(
+            color: Colors.redAccent,
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          ),
+          child: null,
+        ),
+        Container(
+          height: 15.0,
+          width: 100.0,
+          child: Center(child: Text(taskGroup.progress.toString())),
+        )
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,33 +68,7 @@ class TaskGroupWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Stack(
-                children: <Widget>[
-                  Container(
-                    height: 15.0,
-                    width: 100.0,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                    child: null,
-                  ),
-                  Container(
-                    height: 15.0,
-                    width: taskGroup.progress,
-                    decoration: BoxDecoration(
-                      color: Colors.redAccent,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                    child: null,
-                  ),
-                  Container(
-                    height: 15.0,
-                    width: 100.0,
-                    child: Center(child: Text(taskGroup.progress.toString())),
-                  )
-                ],
-              ),
+              progressGauge(),
             ],
           ),
         ),

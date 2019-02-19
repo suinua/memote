@@ -27,7 +27,8 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
           )),
           RaisedButton(
             onPressed: () {
-              widget.parent.addChild(Task(taskTextController.text));
+              widget.parent.addChild(
+                  Task(taskTextController.text));
             },
             child: Icon(Icons.add),
           )

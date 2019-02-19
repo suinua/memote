@@ -1,5 +1,4 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:memote/models/task.dart';
 import 'package:memote/models/task_group.dart';
 import 'package:meta/meta.dart';
 

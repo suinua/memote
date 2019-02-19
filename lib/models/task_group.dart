@@ -1,66 +1,47 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:memote/firebase/task_group_children_repository.dart';
+import 'package:memote/bloc/task_group_children_bloc.dart';
 import 'package:memote/models/models_widget/task_group_widget.dart';
 import 'package:memote/models/task.dart';
 
 class TaskGroup {
   final String key;
-  TaskGroupChildrenRepository _repository;
+  TaskGroupChildrenBloc _childrenBloc;
 
   String title;
   List<Task> _children;
 
-  double get progress => _children.isEmpty
-      ? 0.0
-      : getCompletedChildren().length / getAllChildren().length * 100;
+  double get progress => getNotCompletedChildren.length / getAllChildren.length * 10;
 
-  List<Task> getAllChildren() => _children;
+  List<Task> get getAllChildren => _children;
 
-  List<Task> getCompletedChildren() {
-    return _children.where((task) => task.isComplete).toList();
-  }
+  List<Task> get getCompletedChildren => _children.where((task) => task.isComplete).toList();
 
-  List<Task> getNotCompletedChildren() {
-    return _children.where((task) => !task.isComplete).toList();
-  }
+  List<Task> get getNotCompletedChildren => _children.where((task) => !task.isComplete).toList();
 
   Map<String, dynamic> asMap() => {
-        "key": key,
         "title": title,
         "children": _children.map((child) => child.asMap()).toList(),
       };
 
   Widget asWidget() => TaskGroupWidget(taskGroup: this);
 
+  void setChild(List<Task> children){
+    _children = children;
+  }
   void addChild(Task task) {
-    _repository.addChild(task);
+    _childrenBloc.addChild.add(task);
   }
 
   void removeChild(Task task) {
-    _repository.removeChild(task);
+    _childrenBloc.removeChild.add(task);
+  }
+
+  void updateChild(Task task) {
+    _childrenBloc.updateChild.add(task);
   }
 
   TaskGroup(this.title, {this.key, children}) {
-    if (key != null) {
-      void add(Task task) => _children.add(task);
-      void remove(Task task) => _children.add(task);
-
-      final _taskGroupChildrenRef = FirebaseDatabase.instance
-          .reference()
-          .child('task_groups')
-          .child(key)
-          .child('children');
-
-      _repository = TaskGroupChildrenRepository(_taskGroupChildrenRef,
-          onChildAdded: add, onChildRemoved: remove);
-    }
-
-    if (children == null) {
-      this._children = <Task>[];
-    } else {
-      this._children = children;
-    }
+    _childrenBloc = TaskGroupChildrenBloc(this);
   }
 
   factory TaskGroup.fromMap(Map taskGroup) {

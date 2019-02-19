@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:memote/bloc/task_groups_bloc_provider.dart';
 import 'package:memote/models/task_group.dart';
 import 'package:memote/view/pages/create_task_group_page.dart';

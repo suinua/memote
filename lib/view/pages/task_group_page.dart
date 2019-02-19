@@ -53,19 +53,21 @@ class TaskGroupPage extends StatelessWidget {
           ),
           Divider(),
           Expanded(
-            child: _buildChildren(),
+            child: _buildChildren(taskGroup.getAllChildren),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildChildren() {
-    List<Task> children = taskGroup.getAllChildren();
+  Widget _buildChildren(List<Task> children) {
     return ListView.builder(
       itemCount: children.length,
       itemBuilder: (BuildContext context, int index) {
-        return children[index].asWidget();
+        return children[index].asWidget(
+          onChecked: taskGroup.updateChild,
+          onRemoved: taskGroup.removeChild,
+        );
       },
     );
   }
