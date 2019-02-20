@@ -15,24 +15,12 @@ class TaskGroupChildrenBloc {
 
   StreamController<List<Task>> _childrenController =
       StreamController<List<Task>>();
-  //StreamController<List<Task>> _completedChildrenController =
-  //    StreamController<List<Task>>();
-  //StreamController<List<Task>> _notCompletedChildrenController =
-  //    StreamController<List<Task>>();
 
   void _setList(List<Task> children) {
     _childrenController.sink.add(children);
-    //_completedChildrenController.sink.add(children);
-    //_notCompletedChildrenController.sink.add(children);
-    parent.setChild(children);
   }
 
   Stream<List<Task>> get getAll => _childrenController.stream;
-
-  //Stream<List<Task>> get getCompleted => _completedChildrenController.stream;
-//
-  //Stream<List<Task>> get getNotCompleted =>
-  //    _notCompletedChildrenController.stream;
 
   StreamController<Task> _addController = StreamController<Task>();
   StreamController<Task> _updateController = StreamController<Task>();

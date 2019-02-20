@@ -29,6 +29,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
             onPressed: () {
               widget.parent.addChild(
                   Task(taskTextController.text));
+              Navigator.pop(context);
             },
             child: Icon(Icons.add),
           )

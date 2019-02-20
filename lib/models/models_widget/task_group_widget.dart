@@ -14,7 +14,7 @@ class TaskGroupWidget extends StatelessWidget {
       children: <Widget>[
         Container(
           height: 15.0,
-          width: 100.0,
+          width: 150.0,
           decoration: BoxDecoration(
             color: Colors.grey,
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -23,7 +23,7 @@ class TaskGroupWidget extends StatelessWidget {
         ),
         Container(
           height: 15.0,
-          width: taskGroup.progress,
+          width: taskGroup.progress * 1.5,
           decoration: BoxDecoration(
             color: Colors.redAccent,
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -32,8 +32,8 @@ class TaskGroupWidget extends StatelessWidget {
         ),
         Container(
           height: 15.0,
-          width: 100.0,
-          child: Center(child: Text(taskGroup.progress.toString())),
+          width: 150.0,
+          child: Center(child: Text('${taskGroup.getCompletedChildren.length} / ${taskGroup.getAllChildren.length}')),
         )
       ],
     );

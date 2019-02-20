@@ -8,9 +8,9 @@ class TaskGroup {
   TaskGroupChildrenBloc _childrenBloc;
 
   String title;
-  List<Task> _children;
+  List<Task> _children = <Task>[];
 
-  double get progress => getNotCompletedChildren.length / getAllChildren.length * 10;
+  double get progress => getCompletedChildren.length / getAllChildren.length * 100;
 
   List<Task> get getAllChildren => _children;
 
@@ -25,9 +25,6 @@ class TaskGroup {
 
   Widget asWidget() => TaskGroupWidget(taskGroup: this);
 
-  void setChild(List<Task> children){
-    _children = children;
-  }
   void addChild(Task task) {
     _childrenBloc.addChild.add(task);
   }
@@ -42,6 +39,9 @@ class TaskGroup {
 
   TaskGroup(this.title, {this.key, children}) {
     _childrenBloc = TaskGroupChildrenBloc(this);
+    _childrenBloc.getAll.listen((children){
+      _children = children;
+    });
   }
 
   factory TaskGroup.fromMap(Map taskGroup) {
