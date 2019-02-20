@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:memote/keys.dart';
 
 class PageTitle extends StatelessWidget {
   final String title;
@@ -27,6 +28,7 @@ class PageTitle extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: size,
               ),
+              key: Keys.title,
             ),
           ),
         ),

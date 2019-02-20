@@ -10,7 +10,10 @@ class CreateTaskGroupPage extends StatefulWidget {
 }
 
 class _CreateTaskGroupPageState extends State<CreateTaskGroupPage> {
-  String titleText = '';
+  //controllerだとキーボードを閉じるまで、textが反映されないためStringで管理。
+  //todo test用
+  String titleText = 'title';
+  TextEditingController _titleTextController = TextEditingController(text: 'title');
 
   bool _canSave() => titleText.isNotEmpty;
 
@@ -54,6 +57,8 @@ class _CreateTaskGroupPageState extends State<CreateTaskGroupPage> {
             PageTitle(title: 'New Task Group', size: 30),
             Padding(padding: const EdgeInsets.only(bottom: 50)),
             TextField(
+              //todo test用
+              controller: _titleTextController,
               decoration: InputDecoration(
                 labelText: 'Title',
                 border: OutlineInputBorder(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:memote/bloc/task_groups_bloc_provider.dart';
+import 'package:memote/keys.dart';
 import 'package:memote/models/task_group.dart';
 import 'package:memote/view/pages/create_task_group_page.dart';
 import 'package:memote/view/widgets/page_title.dart';
@@ -64,6 +65,7 @@ class _TaskGroupsPageState extends State<TaskGroupsPage> {
 
   Widget _createTaskGroupButton(BuildContext context) {
     return FloatingActionButton.extended(
+      key: Keys.addTaskGroupButton,
       elevation: 4.0,
       icon: const Icon(Icons.add),
       label: Text('add task group'),

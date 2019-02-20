@@ -16,6 +16,9 @@ dependencies:
   firebase_database: ^1.1.0
 
   flutter_swiper : ^1.1.4
+  flutter_driver:
+    sdk: flutter
+  test: ^1.5.1
 
   flutter:
     sdk: flutter
